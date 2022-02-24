@@ -3,7 +3,7 @@
 #
 # This source code is licensed under the license found in the
 # LICENSE file in the root directory of this source tree.
-#
+# This is your regular ensemble (k is the size of the ensemble)
 
 import torch
 import torch.nn as nn

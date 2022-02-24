@@ -47,9 +47,13 @@ clmodel:
         class_name: torch.optim.Adadelta
         lr: 1.
     model:
-        class_name: crlapi.sl.architectures.mlp.MLP
+        # class_name: crlapi.sl.architectures.mlp.mlp
+        class_name: crlapi.sl.architectures.mlp.MoE_MLP
         size_layers: 64
         n_layers: 2
+        
+        n_experts: 2
+        is_hard: False
      
     kornia_augs:
 
@@ -69,21 +73,3 @@ partition: learnfair
 n_megabatches: 2
 replay: 0
 
-hydra:
-  launcher:
-    nodes: 1
-    mem_gb: 64
-    max_num_timeout: 3
-    cpus_per_task: 10
-    signal_delay_s: 30
-    timeout_min: ${time}
-    gpus_per_node: ${gpus}
-    tasks_per_node: ${gpus}
-    submitit_folder: '/checkpoint/lucaspc/grow_moe_refac/output'
-    partition: ${partition}
-  job_logging:
-    root:
-      handlers: []
-
-defaults:
-  - hydra/launcher: submitit_slurm

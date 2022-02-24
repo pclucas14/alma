@@ -18,17 +18,20 @@ stream:
         directory: ${data_dir}
 
 clmodel:
-    class_name: crlapi.sl.clmodels.ensemble.Ensemble
-
+    class_name: crlapi.sl.clmodels.agg_ensemble.AggEnsemble
+    
+    # Ensemble specific
+    k: 3
     vote: False
-
+    
     init_from_scratch: False
+
     cache_dl: True
     training_batch_size: 128
     training_num_workers: 4
 
     validation_proportion: 0.1
-    validation_batch_size: 128
+    validation_batch_size: 512
     validation_num_workers: 4
     
     train_replay_proportion: ${replay}
@@ -37,9 +40,9 @@ clmodel:
     max_epochs: 100
     device: ${device}
 
-    patience: 25
-    patience_delta: 0.001
-    
+    patience: 100
+    patience_delta: 0
+
     optim:
         class_name: torch.optim.Adadelta
         lr: 1.
@@ -56,7 +59,7 @@ clmodel:
 
 evaluation:
     mode: all_tasks
-    batch_size: 64
+    batch_size: 512
     num_workers: 2
     device: ${device}
 

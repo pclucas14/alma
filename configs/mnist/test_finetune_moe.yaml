@@ -64,24 +64,3 @@ time: 1000
 gpus: 1
 partition: learnfair
 n_megabatches: 2
-
-hydra:
-  launcher:
-    nodes: 1
-    mem_gb: 64
-    max_num_timeout: 3
-    cpus_per_task: 10
-    signal_delay_s: 30
-    timeout_min: ${time}
-    gpus_per_node: ${gpus}
-    tasks_per_node: ${gpus}
-    submitit_folder: '/checkpoint/lucaspc/grow_moe_refac/output'
-    partition: ${partition}
-  job_logging:
-    root:
-      handlers: []
-  #run:
-    #dir: '/private/home/lucaspc/grow_moe_refac/output'
-
-defaults:
-  - hydra/launcher: submitit_slurm
